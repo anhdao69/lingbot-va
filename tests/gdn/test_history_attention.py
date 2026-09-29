@@ -135,7 +135,7 @@ def test_dense_original_equivalence_including_eviction(tmp_path, device):
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required")
 @pytest.mark.parametrize("kernel", ["chunk", "recurrent"])
-@pytest.mark.parametrize("tokens", [16, 128])
+@pytest.mark.parametrize("tokens", [16, 32, 128, 240])
 def test_fla_state_matches_reference_and_input_immutable(kernel, tokens):
     _q, k, v = inputs("cuda", torch.bfloat16, tokens, 2, 128)
     m = GDNHistory(2, 128, kernel=kernel).cuda()
@@ -151,7 +151,7 @@ def test_fla_state_matches_reference_and_input_immutable(kernel, tokens):
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required")
-@pytest.mark.parametrize("tokens", [16, 128])
+@pytest.mark.parametrize("tokens", [16, 32, 128, 240])
 def test_fused_read_matches_fp32_reference(tokens):
     q, k, v = inputs("cuda", torch.bfloat16, tokens, 24, 128)
     m = GDNHistory(24, 128, read_kernel="torch").cuda()

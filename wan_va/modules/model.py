@@ -338,6 +338,11 @@ class WanAttention(torch.nn.Module):
         self.history_memory = None
 
     def clear_pred_cache(self, cache_name):
+        if self.history_backend == 'dense_fast':
+            cache = self.attn_caches.get(cache_name)
+            if cache is not None:
+                cache.clear_pred()
+            return
         if self.history_backend == 'local':
             return
         if self.history_memory is not None:
@@ -361,6 +366,11 @@ class WanAttention(torch.nn.Module):
 
     def init_kv_cache(self, cache_name, total_tolen, num_head, head_dim,
                       device, dtype, batch_size):
+        if self.history_backend == 'dense_fast':
+            from .dense_cache import DenseFastCache
+            self.attn_caches[cache_name] = DenseFastCache(
+                total_tolen, batch_size, num_head, head_dim, device, dtype)
+            return
         if self.history_backend != 'full':
             if self.history_memory is not None:
                 self.history_memory.clear(cache_name)
@@ -415,6 +425,8 @@ class WanAttention(torch.nn.Module):
             return torch.tensor(0, device=ids.device, dtype=ids.dtype)
 
     def update_cache(self, cache_name, key, value, is_pred):
+        if self.history_backend == 'dense_fast':
+            return self.attn_caches[cache_name].append(key, value, is_pred)
         cache = self.attn_caches[cache_name]
 
         key_size = key.shape[1]
@@ -430,6 +442,9 @@ class WanAttention(torch.nn.Module):
         return slots
 
     def restore_cache(self, cache_name, slots):
+        if self.history_backend == 'dense_fast':
+            self.attn_caches[cache_name].restore(slots)
+            return
         if self.history_memory is not None:
             self.history_memory.restore(cache_name, slots)
             return
@@ -463,6 +478,11 @@ class WanAttention(torch.nn.Module):
                 return x_out.to(x.dtype)
             query = apply_rotary_emb(query, rotary_emb)
             key = apply_rotary_emb(key, rotary_emb)
+        if self.history_backend == 'dense_fast':
+            hidden_states = (kv_cache.attend(query, key, value, update_cache, self.attn_op)
+                             if kv_cache is not None else self.attn_op(query, key, value))
+            hidden_states = hidden_states.flatten(2, 3).type_as(query)
+            return self.to_out[1](self.to_out[0](hidden_states))
         if self.history_backend != 'full':
             if self.cross_attention_dim_head is not None:
                 raise RuntimeError('History backends apply to self-attention only')

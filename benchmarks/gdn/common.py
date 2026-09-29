@@ -20,6 +20,7 @@ from wan_va_server import VA_Server, init_logger
 
 VARIANTS = {
     "dense": ("full", 0),
+    "dense_fast": ("dense_fast", 1),
     "local50": ("local", 0.5),
     "local75": ("local", 0.75),
     "local100": ("local", 1),
@@ -33,9 +34,11 @@ def parser():
     p = argparse.ArgumentParser()
     p.add_argument(
         "--checkpoint",
-        default=str(ROOT / "checkpoints/lingbot-va-posttrain-libero-long"),
+        default=None,
     )
     p.add_argument("--variant", choices=VARIANTS, default="dense")
+    p.add_argument("--config", choices=["libero", "robotwin"], default="libero")
+    p.add_argument("--dense-backend", choices=["full", "dense_fast"], default="full")
     p.add_argument("--adapter")
     gates = p.add_mutually_exclusive_group()
     gates.add_argument(
@@ -60,7 +63,11 @@ def load_model(args):
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
     torch.cuda.manual_seed_all(args.seed)
-    c = VA_CONFIGS["libero"]
+    c = VA_CONFIGS[args.config]
+    if args.checkpoint is None:
+        name = "robotwin" if args.config == "robotwin" else "libero-long"
+        args.checkpoint = str(ROOT / ("checkpoints/lingbot-va-posttrain-" + name))
+    c.dense_backend = args.dense_backend
     c.wan22_pretrained_model_name_or_path = args.checkpoint
     c.history_backend, c.history_fraction = VARIANTS[args.variant]
     c.gdn_replicated_gates = not args.shard_gates
@@ -80,6 +87,7 @@ def load_model(args):
     metadata["profiler_version"] = "preallocated_events_v2"
     sources = list((ROOT / "benchmarks/gdn").glob("*.py")) + [
         ROOT / "wan_va/modules/history_attention.py",
+        ROOT / "wan_va/modules/dense_cache.py",
         ROOT / "wan_va/modules/history_kernels.py",
         ROOT / "wan_va/modules/model.py",
         ROOT / "wan_va/wan_va_server.py",
@@ -139,7 +147,13 @@ class EventProfiler:
         self.flag = int(kwargs.get("update_cache", 0))
         a = self.model.transformer.blocks[0].attn1
         cache = a.attn_caches.get("pos")
-        history = int(cache["mask"].sum().item()) if cache else None
+        history = (
+            cache.length
+            if hasattr(cache, "length")
+            else int(cache["mask"].sum().item())
+            if cache
+            else None
+        )
         if a.history_memory is not None:
             snapshot = a.history_memory.snapshot("pos")
             history = snapshot.committed_tokens + snapshot.speculative_tokens

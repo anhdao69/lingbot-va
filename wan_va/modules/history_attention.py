@@ -189,10 +189,13 @@ def configure_history_attention(
     kernel="auto",
     read_kernel="torch",
     adapter_path=None,
+    dense_backend="full",
 ):
     """Call after loading original weights and before FSDP wrapping."""
-    if backend not in ("full", "local", "local_gdn"):
+    if backend not in ("full", "dense_fast", "local", "local_gdn"):
         raise ValueError(f"Unknown history backend {backend}")
+    if dense_backend not in ("full", "dense_fast"):
+        raise ValueError("dense_backend must be full or dense_fast")
     chosen = (
         set(converted_layers(len(model.blocks), fraction))
         if backend != "full"
@@ -201,7 +204,7 @@ def configure_history_attention(
     for i, block in enumerate(model.blocks):
         attn = block.attn1
         attn.attn_caches = {}
-        attn.history_backend = backend if i in chosen else "full"
+        attn.history_backend = backend if i in chosen else dense_backend
         attn.history_memory = None
         if attn.history_backend == "local_gdn":
             # Keep tiny adaptation parameters in FP32 even with bf16 base weights.
@@ -226,7 +229,9 @@ def cache_bytes(model):
             total += a.history_memory.state_bytes()
         else:
             for cache in a.attn_caches.values():
-                if cache:
+                if hasattr(cache, "state_bytes"):
+                    total += cache.state_bytes()
+                elif cache:
                     total += sum(
                         t.numel() * t.element_size()
                         for t in cache.values()

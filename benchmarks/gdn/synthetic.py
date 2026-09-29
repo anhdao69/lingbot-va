@@ -53,12 +53,19 @@ def hybrid(mem, q, k, v, state, commit=False):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", required=True)
+    parser.add_argument("--queries", nargs="+", type=int, default=[16, 128])
+    parser.add_argument(
+        "--histories",
+        nargs="+",
+        type=int,
+        default=[0, 144, 576, 1152, 2016, 1000, 2000, 5000, 10000, 20000],
+    )
     args = parser.parse_args()
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     torch.manual_seed(0)
     rows, updates = [], []
-    for tokens in (16, 128):
+    for tokens in args.queries:
         q, k, v = [
             torch.randn(2, tokens, 24, 128, device="cuda", dtype=torch.bfloat16)
             for _ in range(3)
@@ -86,7 +93,7 @@ def main():
             updates.append(row)
             print("READ", row, flush=True)
         mem.read_kernel = "triton"
-        for history in (0, 144, 576, 1152, 2016, 1000, 2000, 5000, 10000, 20000):
+        for history in args.histories:
             kh = torch.randn(
                 2, history + tokens, 24, 128, device="cuda", dtype=torch.bfloat16
             )

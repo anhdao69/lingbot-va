@@ -1,0 +1,8 @@
+.s.s.s..s...........sssssssssssss.ss.....                                [100%]
+=============================== warnings summary ===============================
+../../../.cache/uv/archive-v0/4cgIjhQVjZ9XAfUPdVCiD/lib/python3.12/site-packages/torch/amp/autocast_mode.py:270
+  /Users/hoanganh692004/.cache/uv/archive-v0/4cgIjhQVjZ9XAfUPdVCiD/lib/python3.12/site-packages/torch/amp/autocast_mode.py:270: UserWarning: User provided device_type of 'cuda', but CUDA is not available. Disabling
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+22 passed, 19 skipped, 1 warning in 4.69s

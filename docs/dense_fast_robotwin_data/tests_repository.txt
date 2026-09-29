@@ -1,0 +1,16 @@
+
+==================================== ERRORS ====================================
+_____________ ERROR collecting evaluation/robotwin/test_render.py ______________
+ImportError while importing test module '/Users/hoanganh692004/Desktop/code/lingbot-va/evaluation/robotwin/test_render.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+evaluation/robotwin/test_render.py:15: in <module>
+    import sapien.core as sapien
+E   ModuleNotFoundError: No module named 'sapien'
+=========================== short test summary info ============================
+ERROR evaluation/robotwin/test_render.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 4.19s

@@ -1,0 +1,12 @@
+.........................................                                [100%]
+=============================== warnings summary ===============================
+tests/gdn/test_history_attention.py::test_fla_gate_gradients_match_reference
+  /mnt/data/vmo-ai-task/anhdh35/lingbot-va/.venv-libero-eval/lib/python3.10/site-packages/tilelang/cache/__init__.py:82: DeprecationWarning: `tl.disable_tma_lower` is deprecated and will be removed in v0.1.10. Use `T.copy(..., disable_tma=True)` per-copy instead.
+    return cache.cached(
+
+tests/gdn/test_history_attention.py::test_fla_gate_gradients_match_reference
+  /mnt/data/vmo-ai-task/anhdh35/lingbot-va/.venv-libero-eval/lib/python3.10/site-packages/tilelang/jit/kernel.py:170: DeprecationWarning: `tl.disable_tma_lower` is deprecated and will be removed in v0.1.10. Use `T.copy(..., disable_tma=True)` per-copy instead.
+    instance = cls(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+41 passed, 2 warnings in 61.71s (0:01:01)

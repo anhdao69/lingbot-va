@@ -92,6 +92,7 @@ class VA_Server:
             kernel=getattr(job_config, 'gdn_kernel', 'auto'),
             read_kernel=getattr(job_config, 'gdn_read_kernel', 'triton'),
             adapter_path=getattr(job_config, 'gdn_adapter_path', None),
+            dense_backend=getattr(job_config, 'dense_backend', 'full'),
         )
         shard_fn = shard_model
         if getattr(job_config, 'gdn_replicated_gates', True):
