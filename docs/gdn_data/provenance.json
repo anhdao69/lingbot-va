@@ -1,0 +1,9 @@
+{
+  "hostname": "worker-3",
+  "torch": "2.9.0+cu126",
+  "cuda": "12.6",
+  "triton": "3.5.0",
+  "libero_commit": "8f1084e3132a39270c3a13ebe37270a43ece2a01",
+  "fla_commit": "79d12e8ec0ae72bc7f2189b4244d6532ce8c268c",
+  "branch": "gdn"
+}

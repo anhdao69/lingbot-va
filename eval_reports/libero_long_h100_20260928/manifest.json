@@ -1,0 +1,36 @@
+{
+  "checkpoint": {
+    "repo": "robbyant/lingbot-va-posttrain-libero-long",
+    "revision": "0e89d1e753019988aba484e8da2dc0810e264d9f"
+  },
+  "dataset": {
+    "repo": "yifengzhu-hf/LIBERO-datasets",
+    "revision": "f13aa24a3da8c43c7225569f28c562979fa0e35a",
+    "pattern": "libero_10/*"
+  },
+  "repository_commit": "7c6ffa9bfc4b83582cafc860fab4c82cc7deeeeb",
+  "libero_commit": "8f1084e3132a39270c3a13ebe37270a43ece2a01",
+  "benchmark": "libero_10",
+  "task_order_index": 0,
+  "tasks": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "episodes_per_task": 50,
+  "seed": 0,
+  "max_env_timestep": 800,
+  "settling_steps": 5,
+  "attention": "torch",
+  "renderer": "osmesa",
+  "slurm_job_id": "4474",
+  "node": "worker-3",
+  "config_notes": "Checkpoint attn_mode changed flex -> torch; action normalization unchanged; wrappers set checkpoint path and server mode. See compatibility.patch."
+}

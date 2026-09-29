@@ -1,0 +1,15 @@
+{
+  "checkpoint": "/mnt/data/vmo-ai-task/anhdh35/lingbot-va/checkpoints/lingbot-va-posttrain-libero-long",
+  "variant": "local100",
+  "adapter": null,
+  "kernel": "auto",
+  "read_kernel": "triton",
+  "out": "docs/gdn_data/smoke_local100_before",
+  "seed": 0,
+  "tasks": [
+    0,
+    5
+  ],
+  "episodes": 1,
+  "profile": false
+}

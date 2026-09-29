@@ -1,0 +1,62 @@
+[
+  {
+    "chunk": 0,
+    "warmup": true,
+    "profiled": false,
+    "generation_cache_bytes": 94371840,
+    "policy_gpu_ms": 21859.708984375,
+    "policy_wall_ms": 21859.688965138048,
+    "cache_gpu_ms": 328.2812194824219,
+    "cache_wall_ms": 328.3190238289535,
+    "peak_allocated_bytes": 23849984000,
+    "peak_reserved_bytes": 24169676800,
+    "cache_bytes": 94371840,
+    "profile": null,
+    "cache_profile": null
+  },
+  {
+    "chunk": 1,
+    "warmup": false,
+    "profiled": false,
+    "generation_cache_bytes": 188743680,
+    "policy_gpu_ms": 5410.86376953125,
+    "policy_wall_ms": 5414.158338680863,
+    "cache_gpu_ms": 325.3891296386719,
+    "cache_wall_ms": 325.4160201177001,
+    "peak_allocated_bytes": 24026476544,
+    "peak_reserved_bytes": 24257757184,
+    "cache_bytes": 94371840,
+    "profile": null,
+    "cache_profile": null
+  },
+  {
+    "chunk": 2,
+    "warmup": false,
+    "profiled": false,
+    "generation_cache_bytes": 188743680,
+    "policy_gpu_ms": 4691.3125,
+    "policy_wall_ms": 4691.336783114821,
+    "cache_gpu_ms": 270.797119140625,
+    "cache_wall_ms": 270.82865918055177,
+    "peak_allocated_bytes": 24029024256,
+    "peak_reserved_bytes": 24257757184,
+    "cache_bytes": 94371840,
+    "profile": null,
+    "cache_profile": null
+  },
+  {
+    "chunk": 3,
+    "warmup": false,
+    "profiled": false,
+    "generation_cache_bytes": 188743680,
+    "policy_gpu_ms": 4802.9619140625,
+    "policy_wall_ms": 4802.985765039921,
+    "cache_gpu_ms": 266.5151672363281,
+    "cache_wall_ms": 266.5458428673446,
+    "peak_allocated_bytes": 24033218560,
+    "peak_reserved_bytes": 24362614784,
+    "cache_bytes": 94371840,
+    "profile": null,
+    "cache_profile": null
+  }
+]

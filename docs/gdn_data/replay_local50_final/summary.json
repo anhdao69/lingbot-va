@@ -1,0 +1,18 @@
+{
+  "variant": "local50",
+  "adapter": null,
+  "chunks": 11,
+  "policy_ms": 5239.081276633523,
+  "policy_wall_ms": 5239.39252966507,
+  "cache_update_ms": 224.53427124023438,
+  "peak_allocated_bytes": 24742301696,
+  "peak_reserved_bytes": 24807211008,
+  "max_cache_bytes": 796586400,
+  "self_attn_ms": 1651.7532102912664,
+  "cross_attn_ms": 599.520735822618,
+  "ffn_ms": 247.14277604967356,
+  "block_ms": 4768.897997319698,
+  "dense_core_ms": 0.0,
+  "video_ms": 1644.4256896972656,
+  "action_ms": 3647.8399658203125
+}

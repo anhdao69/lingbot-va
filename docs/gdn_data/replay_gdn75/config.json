@@ -1,0 +1,13 @@
+{
+  "checkpoint": "/mnt/data/vmo-ai-task/anhdh35/lingbot-va/checkpoints/lingbot-va-posttrain-libero-long",
+  "variant": "gdn75",
+  "adapter": null,
+  "kernel": "auto",
+  "read_kernel": "triton",
+  "out": "docs/gdn_data/replay_gdn75",
+  "seed": 0,
+  "recording": "outputs/libero_long_20260928T211222Z_seed0/smoke_visualization/real/put both the alphabet soup and the tomato sauce in the basket_20260928_211326",
+  "chunks": 18,
+  "warmup": 3,
+  "instrument": true
+}

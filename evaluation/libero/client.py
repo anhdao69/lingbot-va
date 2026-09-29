@@ -6,7 +6,11 @@ import time
 from libero.libero.envs import OffScreenRenderEnv
 from pathlib import Path
 from tqdm import tqdm
-from lerobot.datasets.utils import write_json
+import json
+
+def write_json(data, path):
+    with open(path, "w") as handle:
+        json.dump(data, handle, indent=2)
 import os
 import imageio
 import cv2

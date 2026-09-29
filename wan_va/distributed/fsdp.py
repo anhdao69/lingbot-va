@@ -17,13 +17,16 @@ def apply_ac(model):
 
 def shard_model(model,
                 param_dtype=torch.bfloat16,
-                reduce_dtype=torch.float32):
+                reduce_dtype=torch.float32,
+                ignored_params=None):
     mp_policy = MixedPrecisionPolicy(
         param_dtype=param_dtype,
         reduce_dtype=reduce_dtype,
         cast_forward_inputs=False,
     )
     fsdp_config = {"mp_policy": mp_policy, "reshard_after_forward": True}
+    if ignored_params:
+        fsdp_config["ignored_params"] = ignored_params
 
     for block in model.blocks:
         fully_shard(block.attn1, **fsdp_config)

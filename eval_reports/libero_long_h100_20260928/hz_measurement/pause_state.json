@@ -1,0 +1,18 @@
+{
+  "processes": [
+    {
+      "pid": 1275843,
+      "start_ticks": "342325059",
+      "prior_state": "S"
+    },
+    {
+      "pid": 1273678,
+      "start_ticks": "342322782",
+      "prior_state": "R"
+    }
+  ],
+  "paused_utc": "2026-09-28T21:28:52Z",
+  "paused_epoch": 1790630932.1510065,
+  "resumed_utc": "2026-09-28T21:31:21Z",
+  "resumed_epoch": 1790631081.7216346
+}

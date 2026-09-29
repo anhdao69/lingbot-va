@@ -1,1 +1,24 @@
 *.pyc
+
+# Local evaluation assets and environments.
+.venv*/
+.eval_setup/
+checkpoints/
+datasets/
+third_party/
+outputs/
+logs/
+.pytest_cache/
+.ruff_cache/
+
+# GDN publishes compact metrics; raw traces and operational state stay local.
+docs/gdn_data/**/*.jsonl
+docs/gdn_data/**/*.log
+docs/gdn_data/**/*.pause.json
+docs/gdn_data/**/debug/
+docs/gdn_data/**/videos/
+docs/gdn_data/resume.md
+docs/gdn_figures/preliminary_*.png
+
+# Superseded patch archive; its changes are represented in the source diff.
+eval_reports/**/compatibility.patch

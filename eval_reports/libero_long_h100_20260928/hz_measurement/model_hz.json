@@ -1,0 +1,23 @@
+{
+  "device": "NVIDIA H100 80GB HBM3",
+  "measurement": "Synchronized direct model inference on recorded real LIBERO RGB observations; original GPU 0 evaluation model/client temporarily SIGSTOPped; GPU 1 evaluation continues.",
+  "checkpoint": "robbyant/lingbot-va-posttrain-libero-long",
+  "attention": "torch",
+  "dtype": "bfloat16",
+  "video_denoising_steps": 20,
+  "action_denoising_steps": 50,
+  "warmup_chunks": 5,
+  "measured_chunks": 20,
+  "actions_per_steady_chunk": 16,
+  "generation_mean_s": 4.898020241083577,
+  "generation_median_s": 5.007921017939225,
+  "generation_p95_s": 5.200123969744891,
+  "generation_min_s": 4.52029495825991,
+  "generation_max_s": 5.241288356948644,
+  "cache_update_mean_s": 0.2109306461410597,
+  "chunk_hz_generation_only": 0.20416412157961447,
+  "action_equivalent_hz_generation_only": 3.2666259452738315,
+  "action_equivalent_hz_with_cache": 3.131758428136264,
+  "excludes": "Simulator stepping, websocket transport, environment reset, initial model load; first five chunks excluded as warmup.",
+  "finished_utc": "2026-09-28T21:31:19Z"
+}

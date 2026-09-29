@@ -84,7 +84,26 @@ class VA_Server:
             torch_device=self.device,
             attn_mode="torch"
         )
+        from modules.history_attention import configure_history_attention
+        configure_history_attention(
+            self.transformer,
+            backend=getattr(job_config, 'history_backend', 'full'),
+            fraction=getattr(job_config, 'history_fraction', 1.0),
+            kernel=getattr(job_config, 'gdn_kernel', 'auto'),
+            read_kernel=getattr(job_config, 'gdn_read_kernel', 'triton'),
+            adapter_path=getattr(job_config, 'gdn_adapter_path', None),
+        )
         shard_fn = shard_model
+        if getattr(job_config, 'gdn_replicated_gates', True):
+            # Tiny frozen gates need no sharding. Match FSDP's bf16 compute
+            # values while avoiding an extra parameter group every forward.
+            gates = {p for block in self.transformer.blocks
+                     if block.attn1.history_memory is not None
+                     for p in block.attn1.history_memory.parameters()}
+            if gates:
+                for parameter in gates:
+                    parameter.data = parameter.data.to(self.dtype)
+                shard_fn = partial(shard_model, ignored_params=gates)
         self.transformer = _configure_model(model=self.transformer,
                                             shard_fn=shard_fn,
                                             param_dtype=self.dtype,

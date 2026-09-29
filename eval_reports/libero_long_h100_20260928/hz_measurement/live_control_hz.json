@@ -1,0 +1,28 @@
+{
+  "measurement": "Passive measurements from existing evaluation log timestamps before the benchmark pause. Infer One Chunk start to the next Infer One Chunk start, within the same episode; first two cycles of each episode excluded. Covers generation, 16 simulator action steps, KV update and websocket roundtrips. Terminal partial chunks and episode resets/video writing excluded.",
+  "cutoff_utc": "2026-09-28T21:28:52Z",
+  "gpus": [
+    {
+      "gpu": 0,
+      "full_steady_cycles": 83,
+      "actions_per_cycle": 16,
+      "cycle_mean_s": 7.105674700564649,
+      "cycle_median_s": 7.044000148773193,
+      "cycle_p95_s": 7.664000034332275,
+      "end_to_end_action_hz": 2.251721430299725,
+      "end_to_end_chunk_hz": 0.14073258939373282,
+      "observed_seconds": 589.7710001468658
+    },
+    {
+      "gpu": 1,
+      "full_steady_cycles": 82,
+      "actions_per_cycle": 16,
+      "cycle_mean_s": 6.342719514195512,
+      "cycle_median_s": 6.242000102996826,
+      "cycle_p95_s": 7.064000129699707,
+      "end_to_end_action_hz": 2.522577257939709,
+      "end_to_end_chunk_hz": 0.15766107862123183,
+      "observed_seconds": 520.103000164032
+    }
+  ]
+}

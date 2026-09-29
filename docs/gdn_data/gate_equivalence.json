@@ -1,0 +1,194 @@
+[
+  {
+    "file": "actions_0.pt",
+    "shape": [
+      1,
+      30,
+      4,
+      4,
+      1
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "actions_12.pt",
+    "shape": [
+      1,
+      30,
+      4,
+      4,
+      1
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "actions_16.pt",
+    "shape": [
+      1,
+      30,
+      4,
+      4,
+      1
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "actions_20.pt",
+    "shape": [
+      1,
+      30,
+      4,
+      4,
+      1
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "actions_24.pt",
+    "shape": [
+      1,
+      30,
+      4,
+      4,
+      1
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "actions_28.pt",
+    "shape": [
+      1,
+      30,
+      4,
+      4,
+      1
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "actions_4.pt",
+    "shape": [
+      1,
+      30,
+      4,
+      4,
+      1
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "actions_8.pt",
+    "shape": [
+      1,
+      30,
+      4,
+      4,
+      1
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "latents_0.pt",
+    "shape": [
+      1,
+      48,
+      4,
+      8,
+      16
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "latents_12.pt",
+    "shape": [
+      1,
+      48,
+      4,
+      8,
+      16
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "latents_16.pt",
+    "shape": [
+      1,
+      48,
+      4,
+      8,
+      16
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "latents_20.pt",
+    "shape": [
+      1,
+      48,
+      4,
+      8,
+      16
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "latents_24.pt",
+    "shape": [
+      1,
+      48,
+      4,
+      8,
+      16
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "latents_28.pt",
+    "shape": [
+      1,
+      48,
+      4,
+      8,
+      16
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "latents_4.pt",
+    "shape": [
+      1,
+      48,
+      4,
+      8,
+      16
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  },
+  {
+    "file": "latents_8.pt",
+    "shape": [
+      1,
+      48,
+      4,
+      8,
+      16
+    ],
+    "exact": true,
+    "max_abs": 0.0
+  }
+]

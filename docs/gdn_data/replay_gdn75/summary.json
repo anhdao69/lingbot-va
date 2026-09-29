@@ -1,0 +1,18 @@
+{
+  "variant": "gdn75",
+  "adapter": null,
+  "chunks": 11,
+  "policy_ms": 5360.536088423295,
+  "policy_wall_ms": 5361.175564583391,
+  "cache_update_ms": 235.49140791459516,
+  "peak_allocated_bytes": 24387680768,
+  "peak_reserved_bytes": 25067257856,
+  "max_cache_bytes": 516443808,
+  "self_attn_ms": 1677.2571048140526,
+  "cross_attn_ms": 598.6432002186775,
+  "ffn_ms": 249.19044016301632,
+  "block_ms": 4865.087682902813,
+  "dense_core_ms": 0.0,
+  "video_ms": 1717.1424865722656,
+  "action_ms": 3687.18212890625
+}

@@ -28,8 +28,11 @@ from functools import partial
 
 try:
     from flash_attn_interface import flash_attn_func
-except:
-    from flash_attn import flash_attn_func
+except ImportError:
+    try:
+        from flash_attn import flash_attn_func
+    except ImportError:
+        flash_attn_func = None
 
 __all__ = ['WanTransformer3DModel']
 
@@ -302,6 +305,8 @@ class WanAttention(torch.nn.Module):
         if attn_mode == 'torch':
             self.attn_op = custom_sdpa
         elif attn_mode == 'flashattn':
+            if flash_attn_func is None:
+                raise ImportError('flash-attn is required for attn_mode=flashattn')
             self.attn_op = flash_attn_func
         elif attn_mode == 'flex':
             self.attn_op = FlexAttnFunc(cross_attention_dim_head is not None)
@@ -329,8 +334,15 @@ class WanAttention(torch.nn.Module):
                                        eps=eps,
                                        elementwise_affine=True)
         self.attn_caches = {} if cross_attention_dim_head is None else None
+        self.history_backend = 'full'
+        self.history_memory = None
 
     def clear_pred_cache(self, cache_name):
+        if self.history_backend == 'local':
+            return
+        if self.history_memory is not None:
+            self.history_memory.clear_pred(cache_name)
+            return
         if self.attn_caches is None:
             return
         cache = self.attn_caches[cache_name]
@@ -338,12 +350,21 @@ class WanAttention(torch.nn.Module):
         cache['mask'][is_pred] = False
 
     def clear_cache(self, cache_name):
+        if self.history_backend == 'local':
+            return
+        if self.history_memory is not None:
+            self.history_memory.clear(cache_name)
+            return
         if self.attn_caches is None:
             return
         self.attn_caches[cache_name] = None
 
     def init_kv_cache(self, cache_name, total_tolen, num_head, head_dim,
                       device, dtype, batch_size):
+        if self.history_backend != 'full':
+            if self.history_memory is not None:
+                self.history_memory.clear(cache_name)
+            return
         if self.attn_caches is None:
             return
         self.attn_caches[cache_name] = {
@@ -409,6 +430,9 @@ class WanAttention(torch.nn.Module):
         return slots
 
     def restore_cache(self, cache_name, slots):
+        if self.history_memory is not None:
+            self.history_memory.restore(cache_name, slots)
+            return
         self.attn_caches[cache_name]['mask'][slots] = False
 
     def forward(
@@ -439,6 +463,18 @@ class WanAttention(torch.nn.Module):
                 return x_out.to(x.dtype)
             query = apply_rotary_emb(query, rotary_emb)
             key = apply_rotary_emb(key, rotary_emb)
+        if self.history_backend != 'full':
+            if self.cross_attention_dim_head is not None:
+                raise RuntimeError('History backends apply to self-attention only')
+            if self.history_backend == 'local':
+                hidden_states = custom_sdpa(query, key, value)
+            else:
+                hidden_states = self.history_memory(
+                    query, key, value, update_cache, cache_name)
+            hidden_states = hidden_states.flatten(2, 3).type_as(query)
+            return self.to_out[1](self.to_out[0](hidden_states))
+        capture = getattr(self, '_gdn_capture', None)
+        captured = capture.prepare(query, key, value, update_cache) if capture is not None else None
         slots = None
         if kv_cache is not None and kv_cache['k'] is not None:
             slots = self.update_cache(cache_name,
@@ -453,6 +489,9 @@ class WanAttention(torch.nn.Module):
             value = value_pool[:, valid]
 
         hidden_states = self.attn_op(query, key, value)
+
+        if captured is not None:
+            capture.finish(captured, hidden_states, kv_cache, slots)
 
         if update_cache == 0:
             if kv_cache is not None and kv_cache['k'] is not None:

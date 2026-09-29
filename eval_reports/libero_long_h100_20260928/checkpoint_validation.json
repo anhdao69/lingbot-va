@@ -1,0 +1,8 @@
+{
+  "expected_tensor_count": 839,
+  "missing_tensors": [],
+  "unused_legacy_tensors": [
+    "patch_embedding.bias",
+    "patch_embedding.weight"
+  ]
+}

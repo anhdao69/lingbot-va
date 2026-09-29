@@ -1,0 +1,11 @@
+{
+  "variant": "dense",
+  "adapter": null,
+  "chunks": 15,
+  "policy_ms": 6074.97646484375,
+  "policy_wall_ms": 6075.013972011705,
+  "cache_update_ms": 249.55572306315105,
+  "peak_allocated_bytes": 25560791040,
+  "peak_reserved_bytes": 25625100288,
+  "max_cache_bytes": 1593172800
+}

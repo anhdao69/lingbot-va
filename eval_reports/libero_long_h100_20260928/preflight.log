@@ -1,0 +1,24 @@
+[robosuite WARNING] No private macro file found! (__init__.py:7)
+[robosuite WARNING] It is recommended to use a private macro file (__init__.py:8)
+[robosuite WARNING] To setup, run: python /mnt/data/vmo-ai-task/anhdh35/lingbot-va/.venv-libero-eval/lib/python3.10/site-packages/robosuite/scripts/setup_macros.py (__init__.py:9)
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+TORCH 2.9.0+cu126 CUDA 12.6 GPUS 2
+ACTION_NORMALIZATION {"q01": [-0.6589285731315613, -0.84375, -0.9375, -0.12107142806053162, -0.15964286029338837, -0.26571428775787354, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "q99": [0.8999999761581421, 0.8544642925262451, 0.9375, 0.17142857611179352, 0.1842857152223587, 0.34392857551574707, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+/mnt/data/vmo-ai-task/anhdh35/lingbot-va/third_party/LIBERO/libero/libero/benchmark/__init__.py:164: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  init_states = torch.load(init_states_path)
+TASK_OK 0 put both the alphabet soup and the tomato sauce in the basket STATES 50
+/mnt/data/vmo-ai-task/anhdh35/lingbot-va/third_party/LIBERO/libero/libero/benchmark/__init__.py:164: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  init_states = torch.load(init_states_path)
+TASK_OK 1 put both the cream cheese box and the butter in the basket STATES 50
+TASK_OK 2 turn on the stove and put the moka pot on it STATES 50
+TASK_OK 3 put the black bowl in the bottom drawer of the cabinet and close it STATES 50
+TASK_OK 4 put the white mug on the left plate and put the yellow and white mug on the right plate STATES 50
+TASK_OK 5 pick up the book and place it in the back compartment of the caddy STATES 50
+TASK_OK 6 put the white mug on the plate and put the chocolate pudding to the right of the plate STATES 50
+TASK_OK 7 put both the alphabet soup and the cream cheese box in the basket STATES 50
+TASK_OK 8 put both moka pots on the stove STATES 50
+TASK_OK 9 put the yellow and white mug in the microwave and close it STATES 50
+PREFLIGHT_PASSED

@@ -1,0 +1,16 @@
+[
+  {
+    "task": 0,
+    "episode": 0,
+    "success": false,
+    "rng_policy": "restore_post_model_load_each_episode",
+    "seconds": 388.7306085708551
+  },
+  {
+    "task": 5,
+    "episode": 0,
+    "success": false,
+    "rng_policy": "restore_post_model_load_each_episode",
+    "seconds": 345.7155742798932
+  }
+]

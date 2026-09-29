@@ -1,0 +1,11 @@
+{
+  "variant": "gdn100",
+  "adapter": null,
+  "chunks": 5,
+  "policy_ms": 4610.2771484375,
+  "policy_wall_ms": 4610.3152754716575,
+  "cache_update_ms": 230.52157592773438,
+  "peak_allocated_bytes": 24031776768,
+  "peak_reserved_bytes": 24534581248,
+  "max_cache_bytes": 188743680
+}
